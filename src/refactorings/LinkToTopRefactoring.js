@@ -33,9 +33,15 @@ class LinkToTopRefactoring extends UsabilityRefactoring {
         }
     }
 
+    
     onClick() {
         $('body,html').animate({ scrollTop: 0 }, 400);
-        return false;
+        /*var scroll= document.documentElement.scrollTop;
+        if(scroll > 0){
+            window.requestAnimationFrame(this.onClick);
+            window.scrollTo (0,scroll - ( scroll /10));
+        }
+        return false;*/
     }
 
     unDo() {
@@ -74,7 +80,7 @@ class LinkToTopRefactoring extends UsabilityRefactoring {
     }
 
     functions(elementWord, randomInt) {
-        return ["onClick() {\n$('body,html').animate({ scrollTop: 0 }, 400);\nreturn false;\n}\nonScroll() {\nif ($(window).scrollTop() > 0) {\n$('" + elementWord + randomInt.toString() + "').fadeIn();\n}\nelse {\n$('" + elementWord + randomInt.toString() + "').fadeOut();\n}\n}\n"]
+        return ["onClick() {\nvar scroll= document.documentElement.scrollTop; \nif(scroll > 0){\n   window.requestAnimationFrame(this.onClick); \n  window.scrollTo (0,scroll - ( scroll /10)); \n  }\nreturn false;\n}\nonScroll() {\nif ($(window).scrollTop() > 0) {\n$('" + elementWord + randomInt.toString() + "').fadeIn();\n}\nelse {\n$('" + elementWord + randomInt.toString() + "').fadeOut();\n}\n}\n"]
     }
 
     styles(elementWord, randomInt) {
